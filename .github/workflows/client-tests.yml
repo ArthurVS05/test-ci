@@ -1,0 +1,22 @@
+name: client-tests-workflow
+
+# On lance le workflow à chaque pull request
+on:
+  pull_request
+
+# Ce workflow exécute des jobs
+jobs:
+  test-client:
+    # On définit le système d'exploitation du job
+    runs-on: ubuntu-latest
+    # On liste les étapes effectuées par le job
+    # Une step = un name + une action existante ou commandes manuelles
+    steps:
+      # Action 1 : récupère le code du repo où se lance le workflow
+      # On utilise une action fournie par Github uses : action name
+      - name: Check out code
+        uses: actions/checkout@v2
+      # Action 2 : Va dans le dossier client, installe les dépendances et lance les test
+      # commandes manuelles
+      - name: Goto client and run tests
+        run: cd client && npm i && npm test
